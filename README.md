@@ -29,7 +29,7 @@ Contribuições são bem-vindas! Se você deseja melhorar este projeto e deixá-
 ## :busts_in_silhouette: Autores
 
 - [Julio Silvestre](https://github.com/juliocsilvestre)
-- [Nome do(a) Seu(a) Parceiro(a)](https://github.com/mercietc)
+- [Mercia Marques](https://github.com/mercietc)
 
 ## :page_facing_up: Licença
 
