@@ -9,12 +9,15 @@ function buscaSimples(palavraSorteada, letraBuscada) {
     return indice;
 }
 
+function verificaLetraCertaOuErrada(indiceSaida){
+    if(indiceSaida !== undefined) {
+        return console.log(`A letra ${letraBuscada} foi encontrada no indice ${indiceSaida}.`);
+    } else {
+        return console.log(`A letra ${letraBuscada} não foi encontrada na palavra.`);
+    }
+}
+
 const palavraSorteada = 'javascript';
 const letraBuscada = 'c';
 const indiceSaida = buscaSimples(palavraSorteada, letraBuscada);
-
-if(indiceSaida !== undefined) {
-    console.log(`A letra ${letraBuscada} foi encontrada no indice ${indiceSaida}.`);
-} else {
-    console.log(`A letra ${letraBuscada} não foi encontrada na palavra.`);
-}
+const saida = verificaLetraCertaOuErrada(indiceSaida);
