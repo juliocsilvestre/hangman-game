@@ -11,7 +11,7 @@ function buscaSimples(palavraSorteada, letraBuscada) {
 
 const palavraSorteada = 'javascript';
 const letraBuscada = 'c';
-const indiceSaida = buscaSimples(vetor, valorProcurado);
+const indiceSaida = buscaSimples(palavraSorteada, letraBuscada);
 
 if(indiceSaida !== undefined) {
     console.log(`A letra ${letraBuscada} foi encontrada no indice ${indiceSaida}.`);
