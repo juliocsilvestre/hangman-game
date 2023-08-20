@@ -2,11 +2,25 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Jogo da Forca</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../hangman-game/css/style.css">
+    <title>Jogo de Forca</title>
 </head>
 <body>
-    
-    <script src="/js/index.js"></script>
+    <div class="hangman-container">
+        <div class="hangman">
+            <div class="cabeca"></div>
+            <div class="corpo"></div>
+            <div class="braco-esquerdo"></div>
+            <div class="braco-direito"></div>
+            <div class="perna-esquerda"></div>
+            <div class="perna-direita"></div>
+        </div>
+        <div class="palavra-secreta"></div>
+    </div>
+    <input type="text" id="tentativa-input" maxlength="1" class="tentativa-input" placeholder="Adivinhe uma letra!">
+    <button id="tentativa-button" class="tentativa-button"> Adivinhar </button>
+    <div class="mensagem"></div>
+    <script src="../hangman-game/js/script.js"></script>
 </body>
 </html>
