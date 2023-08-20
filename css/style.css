@@ -23,24 +23,24 @@ body {
     margin: 5px;
 }
 
-.word-display {
+.palavra {
     font-size: 24px;
     margin-top: 20px;
 }
 
-.guess-input {
+.tentativa-input {
     font-size: 24px;
     text-align: center;
     margin-top: 20px;
 }
 
-.guess-button {
+.tentativa-button {
     font-size: 18px;
     padding: 5px 10px;
     margin-top: 10px;
 }
 
-.message {
+.mensagem {
     font-size: 24px;
     margin-top: 20px;
 }
