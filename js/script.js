@@ -1,44 +1,66 @@
-const palavras = ["angular", "java", "html", "css", "script"];
+// Lista de palavras
+const palavras = ["javascript", "angular", "programacao", "computador", "internet", "desenvolvimento"];
 
-const palavraSecreta =
-  palavras[Math.floor(Math.random() * palavras.length)];
+// Escolha aleatória de uma palavra
+const palavra = palavras[Math.floor(Math.random() * palavras.length)];
 
-  console.log (palavraSecreta);
+// Array para rastrear letras adivinhadas
+const letrasAdivinhadas = [];
 
-function buscaLetraNaPalavraSecreta(palavraSecreta, letraBuscada) { 
-    let indice = undefined;
+// Número máximo de erros permitidos
+const maxErros = 6;
+let erros = 0;
 
-    for(let i = 0; i < palavraSecreta.length; i++) {
-        if(palavraSecreta[i] === letraBuscada) {
-            indice = i;
+// Elementos da DOM
+const palavraSecreta = document.querySelector('.palavra-secreta');
+const tentativaInput = document.getElementById('tentativa-input');
+const tentativaButton = document.getElementById('tentativa-button');
+const mensagem = document.querySelector('.mensagem');
+const hangmanMembros = document.querySelectorAll('.hangman div');
+
+// Inicializa a exibição da palavra
+const exibePalavra = () => {
+    const displayArray = palavra.split('').map(letter => letrasAdivinhadas.includes(letter) ? letter : '_');
+    palavraSecreta.textContent = displayArray.join(' ');
+};
+
+// Verifica se o jogador venceu
+const vencedor = () => {
+    if (!palavraSecreta.textContent.includes('_')) {
+        mensagem.textContent = 'Você venceu! Parabéns!';
+        tentativaInput.disabled = true;
+        tentativaButton.disabled = true;
+    }
+};
+
+// Verifica se o jogador perdeu
+const perdedor = () => {
+    if (erros >= maxErros) {
+        mensagem.textContent = 'Você perdeu! A palavra era: ' + palavra;
+        tentativaInput.disabled = true;
+        tentativaButton.disabled = true;
+    }
+};
+
+// Lida com uma tentativa do jogador
+const tentativaJogador = () => {
+    const tentativa = tentativaInput.value.toLowerCase();
+    tentativaInput.value = '';
+
+    if (!letrasAdivinhadas.includes(tentativa)) {
+        letrasAdivinhadas.push(tentativa);
+        if (!palavra.includes(tentativa)) {
+            erros++;
+            hangmanMembros[erros - 1].style.backgroundColor = 'red';
         }
+        exibePalavra();
+        vencedor();
+        perdedor();
     }
-    return indice;
-}
+};
 
-function exibePalavra(palavraSecreta){
-    let auxiliar = '_'*(palavraSecreta.length);
-    console.log(auxiliar);
-    output = auxiliar.split('');
-    return output;
-}
+// Event listener para o botão de adivinhar
+tentativaButton.addEventListener('click', tentativaJogador);
 
-function verificaLetraCertaOuErrada(indiceSaida){
-    let output = exibePalavra(palavraSecreta);
-    if(indiceSaida !== undefined) {
-        output[indiceSaida] = palavraSecreta[indiceSaida];
-        // console.log(`A letra ${letraBuscada} foi encontrada no indice ${indiceSaida}.`);
-    } else {
-        output[indiceSaida] = 'X';
-        //return console.log(`A letra ${letraBuscada} não foi encontrada na palavra.`);
-    }
-    console.log(output)
-    return output;
-}
-
-
-let palavraSorteada = 'script';
-palavraSecreta = palavraSorteada.split('');
-const letraBuscada = 'c';
-const indiceSaida = buscaLetraNaPalavraSecreta(palavraSecreta, letraBuscada);
-const saida = verificaLetraCertaOuErrada(indiceSaida);
+// Inicialização
+exibePalavra();
