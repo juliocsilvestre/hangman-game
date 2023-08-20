@@ -20,7 +20,7 @@ const hangmanMembros = document.querySelectorAll('.hangman div');
 
 // Inicializa a exibição da palavra
 const exibePalavra = () => {
-    const displayArray = palavra.split('').map(letter => letrasAdivinhadas.includes(letter) ? letter : '_');
+    const displayArray = palavra.split('').map(letra => letrasAdivinhadas.includes(letra) ? letra : '_');
     palavraSecreta.textContent = displayArray.join(' ');
 };
 
