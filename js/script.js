@@ -1,66 +1,90 @@
-// Lista de palavras
-const palavras = ["javascript", "angular", "programacao", "computador", "internet", "desenvolvimento"];
+const tecnologias = ["java", "react", "node", "python", "php"];
+const palavraSecreta = tecnologias[Math.floor(Math.random() * tecnologias.length)];
+const letrasErradas = [];
+const letrasCorretas = [];
 
-// Escolha aleatória de uma palavra
-const palavra = palavras[Math.floor(Math.random() * palavras.length)];
-
-// Array para rastrear letras adivinhadas
-const letrasAdivinhadas = [];
-
-// Número máximo de erros permitidos
-const maxErros = 6;
-let erros = 0;
-
-// Elementos da DOM
-const palavraSecreta = document.querySelector('.palavra-secreta');
-const tentativaInput = document.getElementById('tentativa-input');
-const tentativaButton = document.getElementById('tentativa-button');
-const mensagem = document.querySelector('.mensagem');
-const hangmanMembros = document.querySelectorAll('.hangman div');
-
-// Inicializa a exibição da palavra
-const exibePalavra = () => {
-    const displayArray = palavra.split('').map(letra => letrasAdivinhadas.includes(letra) ? letra : '_');
-    palavraSecreta.textContent = displayArray.join(' ');
-};
-
-// Verifica se o jogador venceu
-const vencedor = () => {
-    if (!palavraSecreta.textContent.includes('_')) {
-        mensagem.textContent = 'Você venceu! Parabéns!';
-        tentativaInput.disabled = true;
-        tentativaButton.disabled = true;
-    }
-};
-
-// Verifica se o jogador perdeu
-const perdedor = () => {
-    if (erros >= maxErros) {
-        mensagem.textContent = 'Você perdeu! A palavra era: ' + palavra;
-        tentativaInput.disabled = true;
-        tentativaButton.disabled = true;
-    }
-};
-
-// Lida com uma tentativa do jogador
-const tentativaJogador = () => {
-    const tentativa = tentativaInput.value.toLowerCase();
-    tentativaInput.value = '';
-
-    if (!letrasAdivinhadas.includes(tentativa)) {
-        letrasAdivinhadas.push(tentativa);
-        if (!palavra.includes(tentativa)) {
-            erros++;
-            hangmanMembros[erros - 1].style.backgroundColor = 'red';
+document.addEventListener("keydown", (evento) => {
+    const codigo = evento.keyCode;
+    if (isLetra(codigo)) {
+        const letra = evento.key;
+        if (letrasErradas.includes(letra) || letrasCorretas.includes(letra)) {
+            mostrarAvisoLetraRepetida(letra);
+        } else {
+            if (palavraSecreta.includes(letra)) {
+                letrasCorretas.push(letra);
+            } else {
+                letrasErradas.push(letra);
+            }
         }
-        exibePalavra();
-        vencedor();
-        perdedor();
+        atualizarJogo();
     }
-};
+});
 
-// Event listener para o botão de adivinhar
-tentativaButton.addEventListener('click', tentativaJogador);
+function atualizarJogo() {
+    mostrarLetrasErradas();
+    mostrarLetrasCertas();
+    desenharForca();
+    checarJogo();
+}
 
-// Inicialização
-exibePalavra();
+function mostrarLetrasErradas() {
+    const div = document.querySelector(".letras-erradas-container");
+    div.innerHTML = "<h3>Letras erradas</h3>";
+    letrasErradas.forEach((letra) => {
+        div.innerHTML += `<span>${letra}</span>`;
+    });
+}
+
+function mostrarLetrasCertas() {
+    const container = document.querySelector(".palavra-secreta-container");
+    container.innerHTML = "";
+    palavraSecreta.split("").forEach((letra) => {
+        if (letrasCorretas.includes(letra)) {
+            container.innerHTML += `<span>${letra}</span>`;
+        } else {
+            container.innerHTML += `<span>_</span>`;
+        }
+    });
+}
+
+function checarJogo() {
+    let mensagem = "";
+    const container = document.querySelector(".palavra-secreta-container");
+    const partesCorpo = document.querySelectorAll(".forca-parte");
+
+    if (letrasErradas.length === partesCorpo.length) {
+        mensagem = "Fim de jogo! Você perdeu!";
+    }
+
+    if (palavraSecreta === container.innerText) {
+        mensagem = "Parabéns! Você ganhou!";
+    }
+
+    if (mensagem) {
+        document.querySelector("#mensagem").innerHTML = mensagem;
+        document.querySelector(".popup-container").style.display = "flex";
+    }
+}
+
+function desenharForca() {
+    const partesCorpo = document.querySelectorAll(".forca-parte");
+    for (let i = 0; i < letrasErradas.length; i++) {
+        partesCorpo[i].style.display = "block";
+    }
+}
+
+function mostrarAvisoLetraRepetida() {
+    const aviso = document.querySelector(".aviso-palavra-repetida");
+    aviso.classList.add("show");
+    setTimeout(() => {
+        aviso.classList.remove("show");
+    }, 1000);
+}
+
+function isLetra(codigo) {
+    return codigo >= 65 && codigo <= 90;
+}
+
+function reiniciarJogo() {
+    window.location.reload();
+}
