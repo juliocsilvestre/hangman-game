@@ -1,4 +1,4 @@
-const tecnologias = ["java", "react", "node", "python", "php"];
+const tecnologias = ["html", "css", "javascript", "angular", "ada"];
 const palavraSecreta = tecnologias[Math.floor(Math.random() * tecnologias.length)];
 const letrasErradas = [];
 const letrasCorretas = [];
