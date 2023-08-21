@@ -28,16 +28,17 @@ body {
     display: none;
 }
 
-.letras-incorretas-container {
-    font-size: 32px;
+.letras-erradas-container h3 {
+    font-size: 22px;
 }
 
-.letras-incorretas-container span {
+.letras-erradas-container span {
     margin: 0 2px;
+    font-size: 20px;
 }
 
 .palavra-secreta-container {
-    font-size: 45px;
+    font-size: 60px;
 }
 
 .aviso-letra-repetida {
