@@ -5,10 +5,11 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background-color: #141414;
-    color: rgb(243, 243, 243);
+    background-color: #222;
+    color: aliceblue;
     font-family: "Roboto", sans-serif;
 }
+
 
 .jogo-container {
     display: flex;
@@ -18,7 +19,7 @@ body {
 
 .forca {
     fill: transparent;
-    stroke: #9c7e31;
+    stroke: #fff;
     stroke-width: 4px;
     stroke-linecap: round;
 }
@@ -27,11 +28,11 @@ body {
     display: none;
 }
 
-.letras-erradas-container {
+.letras-incorretas-container {
     font-size: 32px;
 }
 
-.letras-erradas-container span {
+.letras-incorretas-container span {
     margin: 0 2px;
 }
 
@@ -39,8 +40,8 @@ body {
     font-size: 45px;
 }
 
-.aviso-palavra-repetida {
-    background-color: rgb(36, 33, 31);
+.aviso-letra-repetida {
+    background-color: rgba(0, 0, 0, 0.3);
     border-radius: 10px 10px 0 0;
     padding: 15px 20px;
     position: absolute;
@@ -48,11 +49,11 @@ body {
     transition: transform 0.3s ease-in-out;
 }
 
-.aviso-palavra-repetida p {
+.aviso-letra-repetida p {
     margin: 0;
 }
 
-.aviso-palavra-repetida.show {
+.aviso-letra-repetida.show {
     transform: translateY(-50px);
 }
 
@@ -61,7 +62,7 @@ body {
 }
 
 .popup-container {
-    background-color: rgba(28, 26, 26, 0.849);
+    background-color: rgba(0, 0, 0, 0.849);
     position: fixed;
     top: 0;
     bottom: 0;
@@ -73,7 +74,7 @@ body {
 }
 
 .popup {
-    background: #000;
+    background: #2980b9;
     border-radius: 5px;
     box-shadow: 0 15px 10px 3px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -82,9 +83,17 @@ body {
 
 .popup button {
     cursor: pointer;
-    background-color: #fafafa;
+    background-color: #fff;
     border: 0;
     margin-top: 20px;
     padding: 12px 20px;
     font-size: 16px;
+}
+
+.aviso-palavra-repetida {
+    display: none;
+}
+
+.aviso-palavra-repetida.show {
+    display: block;
 }

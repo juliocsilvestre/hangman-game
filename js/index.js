@@ -4,11 +4,11 @@ const letrasErradas = [];
 const letrasCorretas = [];
 
 document.addEventListener("keydown", (evento) => {
-    const codigo = evento.keyCode; // 65 - 90 (intervalo)
+    const codigo = evento.keyCode;
     if (isLetra(codigo)) {
         const letra = evento.key;
-        if (letrasErradas.includes(letra)) {
-            mostrarAvisoLetraRepetida();
+        if (letrasErradas.includes(letra) || letrasCorretas.includes(letra)) {
+            mostrarAvisoLetraRepetida(letra);
         } else {
             if (palavraSecreta.includes(letra)) {
                 letrasCorretas.push(letra);
